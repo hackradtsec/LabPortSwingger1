@@ -2,6 +2,7 @@
 Lab: Unprotected admin functionality
 
 Prática 1: Lab PortSwingger 
+https://portswigger.net/web-security/access-control/lab-unprotected-admin-functionality
 
 1 - O painel não possui nenhuma forma de autenticação. Qualquer pessoa pode acessar e fazer alterações nos usuários.
 
