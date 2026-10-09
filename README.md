@@ -9,10 +9,12 @@ Severidade: Alta
 Prática 1: Lab PortSwingger 
 https://portswigger.net/web-security/access-control/lab-unprotected-admin-functionality
 
-1. Descrição do Problema e Diagnóstico Inicial
+**1. Descrição do Problema e Diagnóstico Inicial**
+
 O painel de administração da aplicação vulnerável não implementa nenhuma camada de autenticação ou autorização. Isso significa que a interface administrativa está exposta publicamente e qualquer visitante não autenticado (usuário anônimo) pode acessar a página, visualizar dados confidenciais e realizar alterações destrutivas na base de usuários do sistema.
 
-2. Vetor de Ataque e Passo a Passo da Exploração (PoC)
+**2. Vetor de Ataque e Passo a Passo da Exploração (PoC)**
+
 A identificação e a exploração da vulnerabilidade ocorrem em poucas etapas através de vetores conhecidos como Reconhecimento e Navegação Forçada (Forced Browsing):
 
   - Descoberta do Endpoint Oculto (/robots.txt):
@@ -31,7 +33,7 @@ A identificação e a exploração da vulnerabilidade ocorrem em poucas etapas a
 
     -> Na interface carregada, o sistema disponibiliza opções para exclusão de contas. O atacante pode interagir diretamente com os botões de ação e remover qualquer usuário cadastrado no sistema.
 
-3. Análise de Impacto e Recomendações de Segurança
+**3. Análise de Impacto e Recomendações de Segurança**
 
   - Impacto do Ataque
 Uma pessoa mal-intencionada que explore essa falha consegue apagar todos os usuários cadastrados na plataforma. Isso resulta em:
