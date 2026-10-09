@@ -6,8 +6,7 @@ Tipo de Vulnerabilidade: Controle de Acesso Ausente / Broken Access Control (BAC
 
 Severidade: Alta
 
-Prática 1: Lab PortSwingger 
-https://portswigger.net/web-security/access-control/lab-unprotected-admin-functionality
+Lab: https://portswigger.net/web-security/access-control/lab-unprotected-admin-functionality
 
 **1. Descrição do Problema e Diagnóstico Inicial**
 
