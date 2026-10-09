@@ -15,44 +15,44 @@ O painel de administração da aplicação vulnerável não implementa nenhuma c
 2. Vetor de Ataque e Passo a Passo da Exploração (PoC)
 A identificação e a exploração da vulnerabilidade ocorrem em poucas etapas através de vetores conhecidos como Reconhecimento e Navegação Forçada (Forced Browsing):
 
-Descoberta do Endpoint Oculto (/robots.txt):
+  - Descoberta do Endpoint Oculto (/robots.txt):
 
-Ao acessar a raiz do site e adicionar a rota /robots.txt no final da URL, o arquivo de configuração de rastreamento do site é exibido.
+    -> Ao acessar a raiz do site e adicionar a rota /robots.txt no final da URL, o arquivo de configuração de rastreamento do site é exibido.
+  
+    -> O arquivo expõe abertamente a diretiva de restrição Disallow: /administrator-panel, revelando a localização do painel administrativo.
 
-O arquivo expõe abertamente a diretiva de restrição Disallow: /administrator-panel, revelando a localização do painel administrativo.
+  - Acesso Direto ao Painel:
 
-Acesso Direto ao Painel:
+    -> O atacante altera a URL no navegador, substituindo /robots.txt por /administrator-panel.
 
-O atacante altera a URL no navegador, substituindo /robots.txt por /administrator-panel.
+    -> Como não há verificação de credenciais no servidor, o sistema concede acesso imediato ao painel administrativo completo.
 
-Como não há verificação de credenciais no servidor, o sistema concede acesso imediato ao painel administrativo completo.
+  - Execução de Ações Não Autorizadas:
 
-Execução de Ações Não Autorizadas:
-
-Na interface carregada, o sistema disponibiliza opções para exclusão de contas. O atacante pode interagir diretamente com os botões de ação e remover qualquer usuário cadastrado no sistema.
+    -> Na interface carregada, o sistema disponibiliza opções para exclusão de contas. O atacante pode interagir diretamente com os botões de ação e remover qualquer usuário cadastrado no sistema.
 
 3. Análise de Impacto e Recomendações de Segurança
 
-- Impacto do Ataque
+  - Impacto do Ataque
 Uma pessoa mal-intencionada que explore essa falha consegue apagar todos os usuários cadastrados na plataforma. Isso resulta em:
 
-Perda de Integridade e Disponibilidade: Negação de serviço (DoS) aos usuários legítimos do sistema.
+    -> Perda de Integridade e Disponibilidade: Negação de serviço (DoS) aos usuários legítimos do sistema.
 
-Comprometimento da Aplicação: Acesso a recursos críticos por agentes não autorizados.
+    -> Comprometimento da Aplicação: Acesso a recursos críticos por agentes não autorizados.
 
-- Recomendações de Remediação
-Para corrigir a vulnerabilidade e garantir o funcionamento seguro da aplicação, devem ser adotadas as seguintes medidas:
+  - Recomendações de Remediação
+    -> Para corrigir a vulnerabilidade e garantir o funcionamento seguro da aplicação, devem ser adotadas as seguintes medidas:
 
-Implementação de Autenticação e Autorização:
+  - Implementação de Autenticação e Autorização:
 
-Exigir obrigatoriamente que o usuário esteja autenticado (com sessão válida) para acessar a rota /administrator-panel.
+    -> Exigir obrigatoriamente que o usuário esteja autenticado (com sessão válida) para acessar a rota /administrator-panel.
 
-Implementar validação de perfil/função (Role-Based Access Control - RBAC) diretamente no servidor, garantindo que apenas contas marcadas com a permissão de Administrator possam carregar o painel ou executar ações de exclusão.
+    -> Implementar validação de perfil/função (Role-Based Access Control - RBAC) diretamente no servidor, garantindo que apenas contas marcadas com a permissão de Administrator possam carregar o painel ou executar ações de exclusão.
 
-Proteção Contra Segurança por Obscuridade:
+  - Proteção Contra Segurança por Obscuridade:
 
-O arquivo robots.txt não deve ser utilizado como controle de segurança para "esconder" rotas sensíveis, pois é um arquivo público frequentemente auditado por invasores.
+    -> O arquivo robots.txt não deve ser utilizado como controle de segurança para "esconder" rotas sensíveis, pois é um arquivo público frequentemente auditado por invasores.
 
-Validação das Requisições no Lado do Servidor:
+  - Validação das Requisições no Lado do Servidor:
 
-Cada requisição de alteração ou exclusão de usuário deve validar a sessão e as permissões do requisitante antes de processar qualquer alteração no banco de dados.
+    -> Cada requisição de alteração ou exclusão de usuário deve validar a sessão e as permissões do requisitante antes de processar qualquer alteração no banco de dados.
